@@ -19,10 +19,12 @@ jobs:
           python-version: "3.11"
 
       - name: 装依赖
+        working-directory: 知新
         run: |
           pip install requests
 
       - name: 运行脚本
+        working-directory: 知新
         env:
           ZXIN_TOKEN:        ${{ secrets.ZXIN_TOKEN }}
           DING_ACCESS_TOKEN: ${{ secrets.DING_ACCESS_TOKEN }}
