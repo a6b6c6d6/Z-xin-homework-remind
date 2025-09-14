@@ -3,6 +3,7 @@ import requests
 import json
 import time
 import hmac
+from time_utils import human_left
 import hashlib
 import base64
 import os
@@ -21,13 +22,14 @@ def _get_sign() -> str:
     return f"&timestamp={timestamp}&sign={sign}"
 
 def send_ding(msg_dict: dict):
-    """入口保持和以前完全一致，外面无需任何改动"""
     title = "⏰ 作业即将截止"
+    left_str = human_left(msg_dict['截止时间'])
     text = (
         f"### {title}\n"
         f"- 课程名称：{msg_dict['课程名称']}\n"
         f"- 作业标题：{msg_dict['作业标题']}\n"
         f"- 截止时间：{msg_dict['截止时间']}\n"
+        f"- **{left_str}**\n" 
         f"[作业网站如下]({msg_dict['作业网站']})"
     )
     payload = {
@@ -40,4 +42,5 @@ def send_ding(msg_dict: dict):
     # 拼出带签名的完整 url
     url = f"{DING_WEBHOOK}?access_token={ACCESS_TOKEN}{_get_sign()}"
     headers = {"Content-Type": "application/json"}
+
     requests.post(url, data=json.dumps(payload), headers=headers)
