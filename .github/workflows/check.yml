@@ -3,12 +3,12 @@ name: 作业截止检查
 on:
   schedule:
     - cron: '56 23 * * *'   
-  workflow_dispatch:         # 手动点 Run workflow 也能触发
+  workflow_dispatch:         
 
 jobs:
   check:
     runs-on: ubuntu-latest
-    environment: prod        # 关键：这里对应刚才创建的 environment 名称
+    environment: prod       
     steps:
       - name: 拉代码
         uses: actions/checkout@v4
