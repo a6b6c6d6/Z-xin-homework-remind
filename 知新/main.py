@@ -23,7 +23,11 @@ if __name__ == "__main__":
             "pageSize": 1000
         }
         z = session.post(ur3, json=payload, headers=headers).json()
-        aaa = [item['homeworkId'] for item in z.get('data', {}).get('list', [])]
+        aaa =[ {
+            'homeworkId':aa['homeworkId'],
+            'answerProgress':aa.get('answerProgress', 0)
+        }
+        for aa in z.get('data', {}).get('list', [])]
         homeworkId.append(aaa)
     courseName = [item['courseName'] for item in a['data']]
     current_time = time()
@@ -33,9 +37,10 @@ if __name__ == "__main__":
             print(f"课程《{courseName[i]}》暂无未完成的作业")
             continue
         for j in range(get_hw_count(homeworkId, i)):
-            c = homeworkId[i][j]
+            c=homeworkId[i][j]['homeworkId']
             ur2 = f'{URL_HOMEWORK_DETAIL}?homeworkId= {c}'
             b = session.post(ur2, headers=headers).json()
+            answerProgress=homeworkId[i][j]['answerProgress']
             msg = {
                 "课程名称": courseName[i],
                 "作业标题": b['data']['homeworkName'],
@@ -43,4 +48,5 @@ if __name__ == "__main__":
                 "作业网站": f"https://stu.z-xin.net/homework-detail/ {c}?cid={courseId[i]}&crmId={Id[i]}",
             }
             deadline = b['data']['homeworkDeadlineTime']
+
             judge(unfinishCount[i], deadline, msg, courseName[i])
