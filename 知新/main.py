@@ -49,4 +49,5 @@ if __name__ == "__main__":
             }
             deadline = b['data']['homeworkDeadlineTime']
 
-            judge(unfinishCount[i], deadline, msg, courseName[i])
+            judge(unfinishCount[i], deadline, msg, courseName[i],answerProgress)
+
