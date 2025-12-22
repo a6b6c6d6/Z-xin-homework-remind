@@ -24,20 +24,37 @@
 4. 进入 Actions 面板可手动「Run workflow」立即测试
 
 ## 本地调试
-```bash
-# 克隆
-git clone https://github.com/YOUR_NAME/YOUR_REPO.git
-cd YOUR_REPO/知新
 
-# 安装依赖
-pip install requests
+ 本地配置环境变量（.env）
 
-# 配置环境变量后运行
-export LOGIN_USERNAME="你的账号"
-export LOGIN_PASSWORD="你的密码"
-export DING_ACCESS_TOKEN="xxx"
-export DING_SECRET="xxx"
+1. 在项目根目录新建 `.env` 文件（文件名以点开头，无后缀）  
+2. 写入以下内容，**等号左右不要留空格**：
+
+```
+LOGIN_USERNAME=你的知新账号
+LOGIN_PASSWORD=你的知新密码
+DING_ACCESS_TOKEN=钉钉机器人access_token
+DING_SECRET=钉钉机器人加签密钥
+```
+
+3. 安装依赖  
+```
+pip install python-dotenv requests
+```
+
+4. 在 `main.py` 顶部添加两行代码：
+
+```python
+from dotenv import load_dotenv
+load_dotenv()  # 自动加载 .env 到环境变量
+```
+
+5. 运行  
+```
 python main.py
+```
+
+终端出现「课程《xxx》暂无48小时内截止的作业或均已完成」即配置成功；钉钉收到 Markdown 提醒则整条链路已打通。
 ```
 
 ## 推送样例
