@@ -38,9 +38,9 @@ DING_SECRET=钉钉机器人加签密钥
 ```
 
 3. 安装依赖  
-```
+
 pip install python-dotenv requests
-```
+
 
 4. 在 `main.py` 顶部添加两行代码：
 
@@ -72,6 +72,6 @@ python main.py
 - 本工具仅限个人学习管理使用，请勿用于商业或高频骚扰
 
 
-## License
+##  License
 MIT
 
