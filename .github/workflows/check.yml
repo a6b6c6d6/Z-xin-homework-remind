@@ -2,7 +2,7 @@ name: 作业截止检查
 
 on:
   schedule:
-    - cron: '56 23 * * *'   
+    - cron: '56 22 * * *'   
   workflow_dispatch:         
 
 jobs:
